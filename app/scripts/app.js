@@ -16,6 +16,6 @@
   }
 
   angular
-    .module('pomodoroManager', ['ui.router', 'firebase'])
+    .module('pomodoroManager', ['ui.router', 'ui.bootstrap', 'firebase'])
     .config(config);
 })();

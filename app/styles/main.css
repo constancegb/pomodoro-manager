@@ -1,0 +1,13 @@
+html {
+  display: block;
+}
+
+body {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.timer-container {
+  margin-top: 40vh;
+}
