@@ -1,34 +1,43 @@
 (function() {
-  function HomeCtrl(FormatTime, $interval) {
+  function HomeCtrl($interval) {
     var $ctrl = this;
 
-    $ctrl.time = FormatTime(1500);
+    var promise;
+
+    // $ctrl.countdown = function() {
+    //   $ctrl.time--;
+    // };
+
+    $ctrl.time = 1500;
     $ctrl.startOrResetWork = "START";
     $ctrl.startOrResetBreak = "START";
 
     var onBreak = false;
 
-    var countdown = function() {
-      time--;
+    $ctrl.stopTimer = function() {
+      $interval.cancel(promise);
     };
 
-    $ctrl.workTimer = function(time) {
-      if (time === 1500) {
-        $interval(countdown, 1000, [time]);
-        startOrResetWork = "RESET";
-      } else if (0 < time < 1500) {
-        $interval.cancel(promise);
-        startOrResetWork = "START";
-        time = 1500;
-      } else if (time === 0) {}
+    $ctrl.startTimer = function() {
+      //promise = $interval($ctrl.countdown(), 1000, [$ctrl.time]);
+      promise = $interval(function() {$ctrl.time--;}, 1000, [$ctrl.time]);
     };
 
-    $ctrl.breakTimer = function(time) {};
+    $ctrl.workTimer = function() {
+      ($ctrl.startOrResetWork === "START") ? $ctrl.startOrResetWork = "RESET" : $ctrl.startOrResetWork = "START";
+      if ($ctrl.startOrResetWork === "START") {
+        $ctrl.stopTimer();
+        $ctrl.time = 1500;
+      } else if ($ctrl.startOrResetWork === "RESET") {
+        $ctrl.startTimer();
+      }
+    };
 
+    $ctrl.breakTimer = function() {};
 
   }
 
   angular
     .module('pomodoroManager')
-    .controller('HomeCtrl', ['FormatTime', HomeCtrl]);
+    .controller('HomeCtrl', ['$interval', HomeCtrl]);
 })();

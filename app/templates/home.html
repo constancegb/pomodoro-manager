@@ -1,10 +1,10 @@
 <div class="timer-container col-md-2 col-md-offset-5">
-  <h1 ng-bind="home.time"></h1>
+  <h1>{{ home.time | formattime }}</h1>
   <!-- timer -->
 
-  <button type="button" class="btn btn-primary" ng-show="onBreak == false" ng-click="home.workTimer" ng-bind="startOrResetWork"></button>
+  <button type="button" class="btn btn-primary" ng-hide="onBreak == false" ng-click="home.workTimer()" ng-bind="home.startOrResetWork"></button>
   <!-- handles work sessions -->
 
-  <button type="button" class="btn btn-primary" ng-show="onBreak == true" ng-click="home.breakTimer" ng-bind="startOrResetBreak"></button>
+  <button type="button" class="btn btn-primary" ng-show="onBreak == true" ng-click="home.breakTimer()" ng-bind="home.startOrResetBreak"></button>
   <!-- handles breaks -->
 </div>
