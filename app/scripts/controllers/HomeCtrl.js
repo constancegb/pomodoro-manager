@@ -14,6 +14,8 @@
 
     $ctrl.onBreak = false;
 
+    $ctrl.workSessions = 0;
+
     $ctrl.stopTimer = function() {
       $interval.cancel(promise);
     };
@@ -32,8 +34,14 @@
         $ctrl.startTimer();
         promise.then(function() {
                       $ctrl.onBreak = true;
-                      $ctrl.time = 300;
                       $ctrl.startOrResetBreak = "START BREAK";
+                      $ctrl.workSessions++;
+                      if ($ctrl.workSessions === 4) {
+                        $ctrl.time = 1800;
+                        $ctrl.workSessions = 0;
+                      } else {
+                        $ctrl.time = 300;
+                      }
                     });
       }
     };
