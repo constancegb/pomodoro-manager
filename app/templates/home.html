@@ -2,9 +2,9 @@
   <h1>{{ home.time | formattime }}</h1>
   <!-- timer -->
 
-  <button type="button" class="btn btn-primary" ng-hide="onBreak == false" ng-click="home.workTimer()" ng-bind="home.startOrResetWork"></button>
+  <button type="button" ng-hide="home.onBreak" class="btn btn-primary" ng-click="home.workTimer()" ng-bind="home.startOrResetWork"></button>
   <!-- handles work sessions -->
 
-  <button type="button" class="btn btn-primary" ng-show="onBreak == true" ng-click="home.breakTimer()" ng-bind="home.startOrResetBreak"></button>
+  <button type="button" ng-show="home.onBreak" class="btn btn-primary" ng-click="home.breakTimer()" ng-bind="home.startOrResetBreak"></button>
   <!-- handles breaks -->
 </div>
