@@ -1,5 +1,5 @@
 (function() {
-  function HomeCtrl($interval) {
+  function HomeCtrl($interval, $scope) {
     var $ctrl = this;
 
     var promise;
@@ -15,6 +15,10 @@
     $ctrl.onBreak = false;
 
     $ctrl.workSessions = 0;
+
+    var mySound = new buzz.sound( "../../assets/sounds/ding.wav", {
+      preload: true
+    });
 
     $ctrl.stopTimer = function() {
       $interval.cancel(promise);
@@ -33,6 +37,7 @@
       } else if ($ctrl.startOrResetWork === "RESET") {
         $ctrl.startTimer();
         promise.then(function() {
+                      mySound.play();
                       $ctrl.onBreak = true;
                       $ctrl.startOrResetBreak = "START BREAK";
                       $ctrl.workSessions++;
@@ -54,6 +59,7 @@
       } else if ($ctrl.startOrResetBreak === "RESET") {
         $ctrl.startTimer();
         promise.then(function() {
+                      mySound.play();
                       $ctrl.onBreak = false;
                       $ctrl.time = 1500;
                       $ctrl.startOrResetWork = "START WORK";
