@@ -5,7 +5,7 @@
       <h1>Task History</h1>
       <input class="task-input" type="text" ng-model="addedTask"/>
       <button class="task-button" ng-click="home.addTask(addedTask)">Add Task</button>
-      <div class="taskslist" ng-repeat="task in home.tasks">
+      <div class="taskslist" ng-repeat="task in home.tasks | orderBy: 'index':reverse=true">
         <p>{{ task.$value }}</p>
       </div>
     </div>
