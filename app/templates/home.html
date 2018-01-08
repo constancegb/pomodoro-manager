@@ -1,10 +1,25 @@
-<div class="timer-container col-md-2 col-md-offset-5">
-  <h1>{{ home.time | formattime }}</h1>
-  <!-- timer -->
+<section class="container">
 
-  <button type="button" ng-hide="home.onBreak" class="btn btn-primary" ng-click="home.workTimer()" ng-bind="home.startOrResetWork"></button>
-  <!-- handles work sessions -->
+  <div class="tasks-section">
+    <div class="tasks-container">
+      <h1>Task History</h1>
+      <input class="task-input" type="text" ng-model="addedTask"/>
+      <button class="task-button" ng-click="home.addTask(addedTask)">Add Task</button>
+      <div class="taskslist" ng-repeat="task in home.tasks">
+        <p>{{ task.$value }}</p>
+      </div>
+    </div>
+  </div>
 
-  <button type="button" ng-show="home.onBreak" class="btn btn-primary" ng-click="home.breakTimer()" ng-bind="home.startOrResetBreak"></button>
-  <!-- handles breaks -->
-</div>
+  <div class="timer-section">
+    <div class="timer-container">
+      <h1>{{ home.time | formattime }}</h1>
+      <!-- timer -->
+      <button type="button" ng-hide="home.onBreak" class="sessions-btn" ng-click="home.workTimer()" ng-bind="home.startOrResetWork"></button>
+      <!-- handles work sessions -->
+      <button type="button" ng-show="home.onBreak" class="sessions-btn" ng-click="home.breakTimer()" ng-bind="home.startOrResetBreak"></button>
+      <!-- handles breaks -->
+    </div>
+  </div>
+
+</section>

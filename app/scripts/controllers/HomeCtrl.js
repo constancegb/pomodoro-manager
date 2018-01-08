@@ -1,5 +1,5 @@
 (function() {
-  function HomeCtrl($interval, $scope) {
+  function HomeCtrl($interval, Tasks) {
     var $ctrl = this;
 
     var promise;
@@ -11,10 +11,10 @@
     $ctrl.time = 1500;
     $ctrl.startOrResetWork = "START WORK";
     $ctrl.startOrResetBreak = "START BREAK";
-
     $ctrl.onBreak = false;
-
     $ctrl.workSessions = 0;
+
+    $ctrl.tasks = Tasks.all;
 
     var mySound = new buzz.sound( "../../assets/sounds/ding.wav", {
       preload: true
@@ -26,7 +26,12 @@
 
     $ctrl.startTimer = function() {
       //promise = $interval($ctrl.countdown(), 1000, [$ctrl.time]);
-      promise = $interval(function() {$ctrl.time--;}, 1000, [$ctrl.time+1]);
+      promise = $interval(function() {$ctrl.time--;}, 1000, [3/*$ctrl.time+1*/]);
+    };
+
+    $ctrl.addTask = function (addedTask) {
+      $ctrl.tasks.$add(addedTask);
+      //how do I clear the input after submission?
     };
 
     $ctrl.workTimer = function() {
@@ -71,5 +76,5 @@
 
   angular
     .module('pomodoroManager')
-    .controller('HomeCtrl', ['$interval', HomeCtrl]);
+    .controller('HomeCtrl', ['$interval', 'Tasks', HomeCtrl]);
 })();
